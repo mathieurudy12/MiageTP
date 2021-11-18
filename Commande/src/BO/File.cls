@@ -12,9 +12,8 @@ Method ajouterVoitureFichier(pRequest As msg.ajouterVoitureFichierDmde, Output p
     set pResponse = ##class(msg.ajouterVoitureFichierRpse).%New()
     
     set stream = ##class(%Library.FileBinaryStream).%New()
-    set sc = stream.WriteLine(pRequest.voiture.marque_";"_pRequest.voiture.modele_";"_pRequest.voiture.plaque_";"_pRequest.voiture.couleur_";"_pRequest.voiture.nbPlaces_";"_pRequest.voiture.categorie)
-    set ps = ..Adapter.PutStream("test"_$TR($TR($ZDT($ZDTH($ZTS,-3),3,9),":/-","")," ","_")_".csv", stream)
-
+    set sc = stream.WriteLine(pRequest.voiture.marque_";"_pRequest.voiture.modele_";"_pRequest.voiture.categorie_";"_pRequest.voiture.plaque_";"_pRequest.voiture.couleur_";"_pRequest.voiture.nbPlaces)
+    set ps = ..Adapter.PutStream("fichierVoiture"_$TR($TR($ZDT($ZDTH($ZTS,-3),3,9),":/-","")," ","_")_".csv", stream)
     set pResponse.codeRetour = "OK"
 
     Quit $$$OK
