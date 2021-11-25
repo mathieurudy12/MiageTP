@@ -10,8 +10,10 @@ XData UrlMap [ XMLNamespace = "http://www.intersystems.com/urlmap" ]
 <Route Url="/" Method="GET" Call="GetInfo" Cors="true"/>
 <!-- Swagger specs -->
 <Route Url="/_spec" Method="GET" Call="SwaggerSpec" />
-<!-- Créer une voiture-->
+<!-- Récupérer le catalogue -->
 <Route Url="/catalogue/" Method="get" Call="GetCatalogue"/>
+<!-- Commander une voiture -->
+<Route Url="/voiture/" Method="POST" Call="CommanderVoiture"/>
 </Routes>
 }
 
@@ -40,8 +42,30 @@ ClassMethod GetCatalogue() As %Status
 {
 	  #dim tSC As %Status = $$$OK
     Set msg = ##class(msg.getCatalogueDmde).%New()
-    set tSC = ##class(Ens.Director).CreateBusinessService("ServiceCatalogue",.tService) if $$$ISERR(tSC) quit 
+    set tSC = ##class(Ens.Director).CreateBusinessService("ServiceCatalogue",.tService) if $$$ISERR(tSC) quit tSC
     set tSC = tService.ProcessInput(msg,.response,"GetCatalogue")
+
+    Set %response.Status = 200
+    Set %response.ContentType = ..#CONTENTTYPEJSON
+    Do response.%JSONExport()
+
+    Quit tSC
+}
+
+ClassMethod CommanderVoiture() As %Status
+{
+	  #dim tSC As %Status = $$$OK
+    Set msg = ##class(msg.commandeDmde).%New()
+
+
+    //On récupére les données de la requête
+    Set data=%request.Content
+    do msg.%JSONImport(data)
+    //$$$TOE(tSC,msg.%JSONImport(data))
+
+
+    set tSC = ##class(Ens.Director).CreateBusinessService("ServiceVoiture",.tService) if $$$ISERR(tSC) quit tSC
+    set tSC = tService.ProcessInput(msg,.response,"CommandeVoiture")
 
     Set %response.Status = 200
     Set %response.ContentType = ..#CONTENTTYPEJSON

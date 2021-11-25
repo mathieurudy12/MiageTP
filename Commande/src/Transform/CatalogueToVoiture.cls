@@ -1,4 +1,4 @@
-Class Transform.CatalogueToVoiture Extends Ens.DataTransformDTL [ DependsOn = (data.Catalogue, data.Voiture) ]
+Class Transform.CatalogueToVoiture Extends Ens.DataTransformDTL [ DependsOn = (webObjet.wsCatalogue, webObjet.wsVoiture) ]
 {
 
 Parameter IGNOREMISSINGSOURCE = 1;
@@ -9,7 +9,7 @@ Parameter TREATEMPTYREPEATINGFIELDASNULL = 0;
 
 XData DTL [ XMLNamespace = "http://www.intersystems.com/dtl" ]
 {
-<transform sourceClass='data.Catalogue' targetClass='data.Voiture' create='new' language='objectscript' >
+<transform sourceClass='webObjet.wsCatalogue' targetClass='webObjet.wsVoiture' create='new' language='objectscript' >
 <assign value='source.marque' property='target.marque' action='set' />
 <assign value='source.modele' property='target.modele' action='set' />
 <assign value='source.nbPlaces' property='target.nbPlaces' action='set' />
