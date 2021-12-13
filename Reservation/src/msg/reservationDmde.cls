@@ -3,9 +3,9 @@ Class msg.reservationDmde Extends (Ens.Request, %JSON.Adaptor)
 
 Property categorie As %String;
 
-Property dateDebut As %Date;
+Property dateDebut As %String;
 
-Property dateFin As %Date;
+Property dateFin As %String;
 
 Storage Default
 {
