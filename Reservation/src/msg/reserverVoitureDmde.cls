@@ -20,9 +20,6 @@ Storage Default
 <Value name="3">
 <Value>dateFin</Value>
 </Value>
-<Value name="4">
-<Value>dateFin</Value>
-</Value>
 </Data>
 <DefaultData>reserverVoitureDmdeDefaultData</DefaultData>
 <Type>%Storage.Persistent</Type>

@@ -8,6 +8,7 @@
 		}
 	],
 	"settings": {
-		"objectscript.conn.active": false
+		"objectscript.conn.active": false,
+		"workbench.colorTheme": "InterSystems Default Dark"
 	}
 }
